@@ -2,6 +2,8 @@
 const exphbs = require ('express-handlebars');
 const express = require ('express');
 const path = require ('node:path/win32');
+const morgan=require('morgan')
+
 
 const app= express();
 
@@ -20,9 +22,8 @@ app.engine('.hbs',exphbs.engine({
 app.set('view engine','.hbs')
 
 // Middlewares 
+app.use(morgan('dev'));
 app.use(express.urlencoded({extended:false}));
-
-
 
 // Global variables 
 
@@ -30,6 +31,7 @@ app.use(express.urlencoded({extended:false}));
 
 //Routes 
 app.use(require('./routes/index.routes'));
+app.use(require('./routes/notes.routes'));
 
 
 //Static Files 
